@@ -29,6 +29,7 @@ public class Combat : MonoBehaviour
         diceValues = playerScript.diceValues;
 
         enemyScript = enemy.GetComponent<Enemy>();
+        managerScript = manager.GetComponent<Manager>();
     }
 
     // Update is called once per frame
@@ -40,7 +41,7 @@ public class Combat : MonoBehaviour
             DealDamage(); //player deals damage first
             playerScript.TakeDamage(enemyScript.DealDamage()); //takes damage from enemy 
         }
-        if (Input.GetKeyDown(KeyCode.E))
+        else if (Input.GetKeyDown(KeyCode.E))
         {
             MakeShield(); //create a shield for the player
             playerScript.TakeDamage(enemyScript.DealDamage()); //takes damage from enemy 
@@ -64,4 +65,5 @@ public class Combat : MonoBehaviour
     {
         enemyScript.TakeDamage(diceValues[RollDiceIndex()]);
     }
+
 }

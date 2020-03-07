@@ -25,6 +25,13 @@ public class Player : MonoBehaviour
         
     }
 
+    public void Reset()
+    {
+
+        Start();
+
+    }
+
     public void TakeDamage(int damageAmount)
     {
         //if there is a shield 
@@ -46,4 +53,5 @@ public class Player : MonoBehaviour
             health -= damageAmount;
         }
     }
+
 }
