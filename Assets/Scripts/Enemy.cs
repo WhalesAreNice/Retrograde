@@ -11,8 +11,8 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         health = 10;
-        damage = 1;
-        shield = 1;
+        damage = 4;
+        shield = 2;
     }
 
     // Update is called once per frame
@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
     {
         //return a number between 90% - 110% of damage
         //return Mathf.RoundToInt(Random.Range(Mathf.Floor(damage * 0.9f), Mathf.Ceil(damage * 1.1f)));
-        shield = 1;
+        shield = 2;
         return damage;
     }
 

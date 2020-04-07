@@ -8,6 +8,7 @@ public class Combat : MonoBehaviour
     public GameObject player;
     Player playerScript;
     string diceType;
+    public int diceRolled;
     int diceSides;
     List<int> diceValues;   //list of dice face values
 
@@ -30,25 +31,37 @@ public class Combat : MonoBehaviour
 
         enemyScript = enemy.GetComponent<Enemy>();
         managerScript = manager.GetComponent<Manager>();
+        diceRolled = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+
         //placeholder for now to test code
         if (Input.GetKeyDown(KeyCode.W))
         {
             DealDamage(); //player deals damage first
-            playerScript.TakeDamage(enemyScript.DealDamage()); //takes damage from enemy 
+            diceRolled++;
         }
         else if (Input.GetKeyDown(KeyCode.E))
         {
             MakeShield(); //create a shield for the player
-            playerScript.TakeDamage(enemyScript.DealDamage()); //takes damage from enemy 
+            diceRolled++;
+        }
+
+        if (diceRolled >= playerScript.dicePerTurn)
+        {
+
+            playerScript.TakeDamage(enemyScript.DealDamage());//takes damage from enemy 
+            diceRolled = 0;
+
         }
 
         Debug.Log("Enemy Health : " + enemyScript.health +
             "\nPlayer Health: " + playerScript.health + " Player Shield: " + playerScript.shield);
+
+
     }
 
     int RollDiceIndex()

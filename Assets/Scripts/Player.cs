@@ -6,13 +6,15 @@ public class Player : MonoBehaviour
 {
     public int health;
     public int shield;
+    public int dicePerTurn;
     public List<int> diceValues;
     // Start is called before the first frame update
     void Start()
     {
         health = 10;
         shield = 0;
-        for(int i = 1; i <= 3; i++)
+        dicePerTurn = 3;
+        for (int i = 1; i <= 3; i++)
         {
             diceValues.Add(i);
             diceValues.Add(i);

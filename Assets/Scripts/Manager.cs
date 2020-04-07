@@ -14,9 +14,11 @@ public class Manager : MonoBehaviour
     //public Combat combat;
     public GameObject player;
     public GameObject enemy;
+    public GameObject manager;
 
     private Player playerScript;
     private Enemy enemyScript;
+    private Combat combatScript;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +26,7 @@ public class Manager : MonoBehaviour
 
         playerScript = player.GetComponent<Player>();
         enemyScript = enemy.GetComponent<Enemy>();
+        combatScript = manager.GetComponent<Combat>();
 
     }
 
@@ -40,11 +43,11 @@ public class Manager : MonoBehaviour
 
         // Updates the displayed amount of health for the player and enemy
         playerHealthText.text = "Player Health: " + playerScript.health;
-        enemyHealthText.text = "Enemy Health: " + enemyScript.health;
+        enemyHealthText.text = "Enemy Health: " + enemyScript.health + "\nEnemy Shield: " + enemyScript.shield;
         // Informs the player of what the enemy will do on it's turn
-        enemyActionText.text = "The enemy intends to deal " + enemyScript.damage + " damage to you and block " + enemyScript.shield + " incoming damage.";
+        enemyActionText.text = "The enemy intends to deal " + enemyScript.damage + " damage to you and block 2 incoming damage.";
         // Tells the player how to play the game
-        Instructions.text = "Press W to roll and attack die and E to roll a defense die. Both dice will roll a value between 1 and 3. Press R to reset the game.";
+        Instructions.text = "Press W to roll and attack die and E to roll a defense die. Both dice will roll a value between 1 and 3.\nYou can roll " + (playerScript.dicePerTurn - combatScript.diceRolled) + " more dice before the enemy takes their action.\nPress R to reset the game.";
 
     }
 
