@@ -76,7 +76,8 @@ public class Combat : MonoBehaviour
         {
             MakeShield(); //create a shield for the player
             diceRolled++;
-        }else if (Input.GetKeyDown(KeyCode.R))
+        }
+        else if (Input.GetKeyDown(KeyCode.R))
         {
             RecklessSwing(); //uses reckless swing dice
             diceRolled++;
@@ -113,7 +114,7 @@ public class Combat : MonoBehaviour
         Debug.Log("Enemy Health : " + enemyScript.health +
             "\nPlayer Health: " + playerScript.health + " Player Shield: " + playerScript.shield);
 
-        if (enemyScript.health == 0)
+        if (enemyScript.health <= 0)
         {
             kill.Play();
         }

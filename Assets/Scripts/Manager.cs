@@ -38,8 +38,8 @@ public class Manager : MonoBehaviour
         // Resets the game
         if (Input.GetKeyDown(KeyCode.R))
         {
-            playerScript.Reset(); //create a shield for the player
-            enemyScript.Reset();//takes damage from enemy 
+            //playerScript.Reset(); //create a shield for the player
+            //enemyScript.Reset();//takes damage from enemy 
         }
 
         // Updates the displayed amount of health for the player and enemy
