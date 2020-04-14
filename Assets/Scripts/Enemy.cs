@@ -6,13 +6,15 @@ public class Enemy : MonoBehaviour
 {
     public int health;
     public int damage;
+    public int defense;
     public int shield;
     // Start is called before the first frame update
     void Start()
     {
-        health = 10;
-        damage = 4;
-        shield = 2;
+        health = 25;
+        damage = 12;
+        defense = 10;
+        shield = 0;
     }
 
     // Update is called once per frame
@@ -28,12 +30,26 @@ public class Enemy : MonoBehaviour
 
     }
 
-    public int DealDamage()
+    public int DealDamage(int numberOfAttacks)
     {
-        //return a number between 90% - 110% of damage
-        //return Mathf.RoundToInt(Random.Range(Mathf.Floor(damage * 0.9f), Mathf.Ceil(damage * 1.1f)));
-        shield = 2;
-        return damage;
+
+        return damage - (damage / 4) * (numberOfAttacks - 1);
+
+    }
+
+    public void GainBlock()
+    {
+
+        shield = defense;
+
+    }
+
+    public int DealDamageAndGainBlock()
+    {
+
+        shield = defense * 2 / 3;
+        return damage / 2;
+
     }
 
     public void TakeDamage(int damageAmount)

@@ -19,6 +19,7 @@ public class Combat : MonoBehaviour
     //using placeholder enemy object for now
     public GameObject enemy;
     Enemy enemyScript;
+    private int turn;
 
 
     // Start is called before the first frame update
@@ -32,11 +33,32 @@ public class Combat : MonoBehaviour
         enemyScript = enemy.GetComponent<Enemy>();
         managerScript = manager.GetComponent<Manager>();
         diceRolled = 0;
+        turn = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+
+        if (turn % 3 == 1)
+        {
+
+            managerScript.enemyIntent = "attack";
+
+        }
+        else if (turn % 3 == 2)
+        {
+
+            managerScript.enemyIntent = "block";
+
+        }
+        else
+        {
+
+            managerScript.enemyIntent = "attackAndBlock";
+
+        }
 
         //placeholder for now to test code
         if (Input.GetKeyDown(KeyCode.W))
@@ -53,7 +75,27 @@ public class Combat : MonoBehaviour
         if (diceRolled >= playerScript.dicePerTurn)
         {
 
-            playerScript.TakeDamage(enemyScript.DealDamage());//takes damage from enemy 
+            if (turn % 3 == 1)
+            {
+
+                playerScript.TakeDamage(enemyScript.DealDamage(2) * 2);//takes damage from enemy 
+
+            }
+            else if (turn % 3 == 2)
+            {
+
+                enemyScript.GainBlock();//takes damage from enemy 
+
+            }
+            else
+            {
+
+                playerScript.TakeDamage(enemyScript.DealDamageAndGainBlock());//takes damage from enemy 
+
+            }
+
+
+            turn++;
             diceRolled = 0;
 
         }
