@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public int shield;
     public int dicePerTurn;
     public List<int> diceValues;
+    public int potentialShield;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +20,7 @@ public class Player : MonoBehaviour
             diceValues.Add(i);
             diceValues.Add(i);
         }
+        potentialShield = 0;
     }
 
     // Update is called once per frame

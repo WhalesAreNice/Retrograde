@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     public int damage;
     public int defense;
     public int shield;
+    public bool isStunned;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +16,7 @@ public class Enemy : MonoBehaviour
         damage = 12;
         defense = 10;
         shield = 0;
+        isStunned = false;
     }
 
     // Update is called once per frame
@@ -33,14 +35,29 @@ public class Enemy : MonoBehaviour
     public int DealDamage(int numberOfAttacks)
     {
 
-        return damage - (damage / 4) * (numberOfAttacks - 1);
+        if (!isStunned)
+        {
+
+            isStunned = false;
+
+            return damage - (damage / 4) * (numberOfAttacks - 1);
+
+        }
+
+        return 0;
 
     }
 
     public void GainBlock()
     {
 
-        shield = defense;
+        if (!isStunned)
+        {
+
+            isStunned = false;
+            shield = defense;
+
+        }
 
     }
 

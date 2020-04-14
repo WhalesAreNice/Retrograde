@@ -20,6 +20,7 @@ public class Combat : MonoBehaviour
     public GameObject enemy;
     Enemy enemyScript;
     private int turn;
+    private int startingEnemyDamage;
 
     //audio variables
     public AudioSource attack;
@@ -40,6 +41,7 @@ public class Combat : MonoBehaviour
         managerScript = manager.GetComponent<Manager>();
         diceRolled = 0;
         turn = 1;
+        startingEnemyDamage = enemyScript.damage;
     }
 
     // Update is called once per frame
@@ -86,6 +88,8 @@ public class Combat : MonoBehaviour
         if (diceRolled >= playerScript.dicePerTurn)
         {
 
+            enemyScript.shield = 0;
+
             if (turn % 3 == 1)
             {
 
@@ -108,6 +112,9 @@ public class Combat : MonoBehaviour
 
             turn++;
             diceRolled = 0;
+            startingEnemyDamage = enemyScript.damage;
+            playerScript.shield = playerScript.potentialShield;
+            playerScript.potentialShield = 0;
 
         }
 
@@ -147,6 +154,116 @@ public class Combat : MonoBehaviour
             playerScript.TakeDamage(selfDamageAmount);
         }
         enemyScript.TakeDamage(dmg);
+    }
+
+    void SteadyShield()
+    {
+
+        int block = 3;
+        int roll = RollDiceIndex();
+
+        if (roll % 2 == 1)
+        {
+
+            block = roll % 6;
+
+        }
+
+        playerScript.shield += block;
+
+    }
+
+    void Wildcard()
+    {
+
+        int block = 0;
+        int damage = 4;
+        int roll = RollDiceIndex();
+
+        if (roll == 5)
+        {
+
+            damage = 0;
+            enemyScript.isStunned = true;
+
+        }
+        else if (roll % 2 == 0)
+        {
+
+            block = 4;
+            damage = 0;
+
+            if (roll == 6)
+            {
+
+                diceRolled -= 2;
+
+            }
+
+        }
+
+        playerScript.shield += block;
+        enemyScript.TakeDamage(damage);
+
+    }
+
+    void Hinder()
+    {
+
+        int hinderance = 2;
+        int roll = RollDiceIndex();
+
+        if (hinderance % 2 == 0)
+        {
+
+            hinderance = 3;
+
+
+            if (roll == 1)
+            {
+
+                hinderance = roll;
+
+            }
+
+        }
+
+        enemyScript.damage -= hinderance;
+
+        if (enemyScript.damage < 0)
+        {
+
+            enemyScript.damage = 0;
+
+        }
+
+    }
+
+    void ShieldBash()
+    {
+
+        int block = 2;
+        int roll = RollDiceIndex();
+
+        playerScript.potentialShield += (int)Mathf.Ceil((float)roll / 2.0f);
+
+        if (playerScript.potentialShield == 3)
+        {
+
+            block = 1;
+
+        }
+
+        playerScript.shield += block;
+
+    }
+
+    void Reposition()
+    {
+
+        playerScript.potentialShield += playerScript.shield / 4;
+        playerScript.shield -= playerScript.shield / 4;
+
     }
 
 }
