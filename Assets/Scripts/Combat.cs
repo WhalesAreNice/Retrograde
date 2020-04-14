@@ -76,6 +76,10 @@ public class Combat : MonoBehaviour
         {
             MakeShield(); //create a shield for the player
             diceRolled++;
+        }else if (Input.GetKeyDown(KeyCode.R))
+        {
+            RecklessSwing(); //uses reckless swing dice
+            diceRolled++;
         }
 
         if (diceRolled >= playerScript.dicePerTurn)
@@ -130,6 +134,18 @@ public class Combat : MonoBehaviour
     {
         enemyScript.TakeDamage(diceValues[RollDiceIndex()]);
         attack.Play();
+    }
+
+    void RecklessSwing()
+    {
+        int dmg = 4 + RollDiceIndex(); // 5 damage if roll 1, 10 damage if roll 6
+        int selfDmgChance = 60 - 10 * RollDiceIndex(); //50% if roll 1, 0% if roll 6
+        int selfDamageAmount = 5; //the amount of damage the player takes if they self damage themselves
+        if (Random.Range(0, 100) <= selfDmgChance) //if a random chance is within selfDamageChance
+        {
+            playerScript.TakeDamage(selfDamageAmount);
+        }
+        enemyScript.TakeDamage(dmg);
     }
 
 }
