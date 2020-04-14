@@ -20,6 +20,12 @@ public class Combat : MonoBehaviour
     public GameObject enemy;
     Enemy enemyScript;
 
+    //audio variables
+    public AudioSource attack;
+    public AudioSource defend;
+    public AudioSource kill;
+    public AudioSource damage;
+
 
     // Start is called before the first frame update
     void Start()
@@ -61,7 +67,10 @@ public class Combat : MonoBehaviour
         Debug.Log("Enemy Health : " + enemyScript.health +
             "\nPlayer Health: " + playerScript.health + " Player Shield: " + playerScript.shield);
 
-
+        if (enemyScript.health == 0)
+        {
+            kill.Play();
+        }
     }
 
     int RollDiceIndex()
@@ -72,11 +81,13 @@ public class Combat : MonoBehaviour
     void MakeShield()
     {
         playerScript.shield += diceValues[RollDiceIndex()];
+        defend.Play();
     }
 
     void DealDamage()
     {
         enemyScript.TakeDamage(diceValues[RollDiceIndex()]);
+        attack.Play();
     }
 
 }
