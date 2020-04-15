@@ -138,7 +138,7 @@ public class Combat : MonoBehaviour
         defend.Play();
     }
 
-    void DealDamage()
+    public void DealDamage()
     {
         enemyScript.TakeDamage(diceValues[RollDiceIndex()]);
         attack.Play();
