@@ -9,12 +9,14 @@ public class Player : MonoBehaviour
     public int dicePerTurn;
     public List<int> diceValues;
     public int potentialShield;
+    public bool preparation;
     // Start is called before the first frame update
     void Start()
     {
         health = 10;
         shield = 0;
         dicePerTurn = 3;
+        preparation = false;
         for (int i = 1; i <= 3; i++)
         {
             diceValues.Add(i);
@@ -58,4 +60,8 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void Heal(int healAmount)
+    {
+        health += healAmount;
+    }
 }

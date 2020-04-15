@@ -156,6 +156,23 @@ public class Combat : MonoBehaviour
         enemyScript.TakeDamage(dmg);
     }
 
+    void VampiricStrike()
+    {
+        int dmg = 2 + RollDiceIndex(); //3 damage if roll 1, 8 damage if roll 6
+        playerScript.Heal(dmg);
+        enemyScript.TakeDamage(dmg);
+    }
+
+    //not affecting anything atm, will add later
+    void Preparation()
+    {
+        int chance = 40 + 10 * RollDiceIndex(); //50% if rolled 1, 100% if rolled 6
+        if (Random.Range(0, 100) <= chance) //if a random range is within chance
+        {
+            playerScript.preparation = true;
+        }
+    }
+
     void SteadyShield()
     {
 
