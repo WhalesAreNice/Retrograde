@@ -10,6 +10,7 @@ public class Combat : MonoBehaviour
     string diceType;
     public int diceRolled;
     int diceSides;
+    int preparationBonus;
     List<int> diceValues;   //list of dice face values
 
     //enemy's variables
@@ -36,6 +37,7 @@ public class Combat : MonoBehaviour
         //diceType = playerScript.diceType;
         //diceSides = playerScript.diceSides;
         diceValues = playerScript.diceValues;
+        preparationBonus = 2;
 
         enemyScript = enemy.GetComponent<Enemy>();
         managerScript = manager.GetComponent<Manager>();
@@ -140,7 +142,12 @@ public class Combat : MonoBehaviour
 
     public void DealDamage()
     {
-        enemyScript.TakeDamage(diceValues[RollDiceIndex()]);
+        int dmg = diceValues[RollDiceIndex()];
+        if (playerScript.preparation)
+        {
+            dmg *= preparationBonus;
+        }
+        enemyScript.TakeDamage(dmg);
         attack.Play();
     }
 
@@ -153,6 +160,10 @@ public class Combat : MonoBehaviour
         {
             playerScript.TakeDamage(selfDamageAmount);
         }
+        if (playerScript.preparation)
+        {
+            dmg *= preparationBonus;
+        }
         enemyScript.TakeDamage(dmg);
     }
 
@@ -160,10 +171,13 @@ public class Combat : MonoBehaviour
     {
         int dmg = 2 + RollDiceIndex(); //3 damage if roll 1, 8 damage if roll 6
         playerScript.Heal(dmg);
+        if (playerScript.preparation)
+        {
+            dmg *= preparationBonus;
+        }
         enemyScript.TakeDamage(dmg);
     }
 
-    //not affecting anything atm, will add later
     void Preparation()
     {
         int chance = 40 + 10 * RollDiceIndex(); //50% if rolled 1, 100% if rolled 6
