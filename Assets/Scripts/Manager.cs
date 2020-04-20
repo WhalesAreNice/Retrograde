@@ -20,6 +20,7 @@ public class Manager : MonoBehaviour
     private Player playerScript;
     private Enemy enemyScript;
     private Combat combatScript;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +35,7 @@ public class Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+    
         // Resets the game
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -43,7 +44,8 @@ public class Manager : MonoBehaviour
         }
 
         // Updates the displayed amount of health for the player and enemy
-        playerHealthText.text = "Player Health: " + playerScript.health;
+        // playerHealthText.text = "Player Health: " + playerScript.health;
+
         enemyHealthText.text = "Enemy Health: " + enemyScript.health + "\nEnemy Shield: " + enemyScript.shield;
 
         // Informs the player of what the enemy will do on it's turn based on what its intent is.
