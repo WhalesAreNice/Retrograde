@@ -22,6 +22,8 @@ public class Manager : MonoBehaviour
     private Combat combatScript;
 
     public Button question_Btn;
+
+    public Text rollsLeft;
     // Start is called before the first frame update
     void Start()
     {
@@ -50,12 +52,13 @@ public class Manager : MonoBehaviour
         //enemyHealthText.text = "Enemy Health: " + enemyScript.health + "\nEnemy Shield: " + enemyScript.shield;
 
         // Informs the player of what the enemy will do on it's turn based on what its intent is.
-        
+
 
         // Tells the player how to play the game
         //Instructions.text = "Press W to roll and attack die and E to roll a defense die. Press R to roll a die that deals 5-10 damage but has a chance of delaing 5 damage to yourself as well."
-            //+ "Both dice will roll a value between 1 and 3.\nYou can roll " + (playerScript.dicePerTurn - combatScript.diceRolled) + " more dice before the enemy takes their action.\nPress R to reset the game.";
+        //+ "Both dice will roll a value between 1 and 3.\nYou can roll " + (playerScript.dicePerTurn - combatScript.diceRolled) + " more dice before the enemy takes their action.\nPress R to reset the game.";
 
+        rollsLeft.text = "Rolls Left: " + (playerScript.dicePerTurn - combatScript.diceRolled);
     }
 
     void showEnemyIntention()

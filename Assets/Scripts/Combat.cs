@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,7 +35,15 @@ public class Combat : MonoBehaviour
     public Button attack_Btn;
     public Button defense_Btn;
     public Button reckless_Btn;
+    //text
+    public Text diceIndex;
 
+    //dice rolls
+    public int shieldroll;
+    public int attackroll;
+    public int recklessroll;
+
+    public Image[] dices;
     // Start is called before the first frame update
     void Start()
     {
@@ -59,7 +68,7 @@ public class Combat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //diceIndex.text = RollDiceIndex().ToString();
 
         if (turn % 3 == 1)
         {
@@ -79,13 +88,6 @@ public class Combat : MonoBehaviour
             managerScript.enemyIntent = "attackAndBlock";
 
         }
-
-        //placeholder for now to test code
-        //if (Input.GetKeyDown(KeyCode.W))
-        //{
-        //    DealDamage(); //player deals damage first
-        //    diceRolled++;
-        //}
 
         if (diceRolled >= playerScript.dicePerTurn)
         {
@@ -136,7 +138,10 @@ public class Combat : MonoBehaviour
 
     void MakeShield()
     {
-        playerScript.shield += diceValues[RollDiceIndex()];
+        shieldroll = RollDiceIndex();
+        showDice(shieldroll);
+        //diceIndex.text = shieldroll.ToString();
+        playerScript.shield += diceValues[shieldroll];
         defend.Play();
 
         diceRolled++;
@@ -144,7 +149,10 @@ public class Combat : MonoBehaviour
 
     public void DealDamage()
     {
-        int dmg = diceValues[RollDiceIndex()];
+        attackroll = RollDiceIndex();
+        showDice(attackroll);
+        //diceIndex.text = attackroll.ToString();
+        int dmg = diceValues[attackroll];
         if (playerScript.preparation)
         {
             dmg *= preparationBonus;
@@ -157,7 +165,10 @@ public class Combat : MonoBehaviour
 
     void RecklessSwing()
     {
-        int dmg = 4 + RollDiceIndex(); // 5 damage if roll 1, 10 damage if roll 6
+        recklessroll = RollDiceIndex();
+        showDice(recklessroll);
+        //diceIndex.text = recklessroll.ToString();
+        int dmg = 4 + recklessroll; // 5 damage if roll 1, 10 damage if roll 6
         int selfDmgChance = 60 - 10 * RollDiceIndex(); //50% if roll 1, 0% if roll 6
         int selfDamageAmount = 5; //the amount of damage the player takes if they self damage themselves
         if (Random.Range(0, 100) <= selfDmgChance) //if a random chance is within selfDamageChance
@@ -302,5 +313,19 @@ public class Combat : MonoBehaviour
         playerScript.shield -= playerScript.shield / 4;
 
     }
-
+    
+    void showDice(int rollnum)
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            if(i == rollnum)
+            {
+                dices[i].enabled = true;
+            }
+            else
+            {
+                dices[i].enabled = false;
+            }
+        }
+    }
 }
