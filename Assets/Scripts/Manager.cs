@@ -44,7 +44,7 @@ public class Manager : MonoBehaviour
         }
 
         // Updates the displayed amount of health for the player and enemy
-         playerHealthText.text = "Player Health: " + playerScript.health;
+        // playerHealthText.text = "Player Health: " + playerScript.health;
 
         //enemyHealthText.text = "Enemy Health: " + enemyScript.health + "\nEnemy Shield: " + enemyScript.shield;
 

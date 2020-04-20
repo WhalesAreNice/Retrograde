@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
 
     
     public Image[] hearts;
+    public Image[] shields;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +28,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //displaying enemy health
         for (int i = 0; i < hearts.Length; i++)
         {
             if (i < health)
@@ -36,6 +38,18 @@ public class Enemy : MonoBehaviour
             else
             {
                 hearts[i].enabled = false;
+            }
+        }
+
+        for (int i = 0; i < shields.Length; i++)
+        {
+            if (i < shield)
+            {
+                shields[i].enabled = true;
+            }
+            else
+            {
+                shields[i].enabled = false;
             }
         }
     }
