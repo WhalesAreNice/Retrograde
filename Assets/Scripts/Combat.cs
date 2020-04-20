@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Combat : MonoBehaviour
 {
@@ -29,6 +30,10 @@ public class Combat : MonoBehaviour
     public AudioSource kill;
     public AudioSource damage;
 
+    //buttons
+    public Button attack_Btn;
+    public Button defense_Btn;
+    public Button reckless_Btn;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +49,11 @@ public class Combat : MonoBehaviour
         diceRolled = 0;
         turn = 1;
         startingEnemyDamage = enemyScript.damage;
+
+        //buttons for different dices
+        attack_Btn.onClick.AddListener(DealDamage);
+        defense_Btn.onClick.AddListener(MakeShield);
+        reckless_Btn.onClick.AddListener(RecklessSwing);
     }
 
     // Update is called once per frame
@@ -71,21 +81,11 @@ public class Combat : MonoBehaviour
         }
 
         //placeholder for now to test code
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            DealDamage(); //player deals damage first
-            diceRolled++;
-        }
-        else if (Input.GetKeyDown(KeyCode.E))
-        {
-            MakeShield(); //create a shield for the player
-            diceRolled++;
-        }
-        else if (Input.GetKeyDown(KeyCode.R))
-        {
-            RecklessSwing(); //uses reckless swing dice
-            diceRolled++;
-        }
+        //if (Input.GetKeyDown(KeyCode.W))
+        //{
+        //    DealDamage(); //player deals damage first
+        //    diceRolled++;
+        //}
 
         if (diceRolled >= playerScript.dicePerTurn)
         {
@@ -138,6 +138,8 @@ public class Combat : MonoBehaviour
     {
         playerScript.shield += diceValues[RollDiceIndex()];
         defend.Play();
+
+        diceRolled++;
     }
 
     public void DealDamage()
@@ -149,6 +151,8 @@ public class Combat : MonoBehaviour
         }
         enemyScript.TakeDamage(dmg);
         attack.Play();
+
+        diceRolled++;
     }
 
     void RecklessSwing()
@@ -165,6 +169,8 @@ public class Combat : MonoBehaviour
             dmg *= preparationBonus;
         }
         enemyScript.TakeDamage(dmg);
+
+        diceRolled++;
     }
 
     void VampiricStrike()
