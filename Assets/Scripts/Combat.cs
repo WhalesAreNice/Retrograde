@@ -70,19 +70,19 @@ public class Combat : MonoBehaviour
     {
         //diceIndex.text = RollDiceIndex().ToString();
 
-        if (turn % 3 == 1)
+        if (enemyScript.health + enemyScript.shield > enemyScript.health * 4 / 5)
         {
 
             managerScript.enemyIntent = "attack";
 
         }
-        else if (turn % 3 == 2)
+        else if (enemyScript.health + enemyScript.shield < enemyScript.health * 3 / 5)
         {
 
             managerScript.enemyIntent = "block";
 
         }
-        else
+        else if (enemyScript.health + enemyScript.shield > enemyScript.health * 3 / 5)
         {
 
             managerScript.enemyIntent = "attackAndBlock";
@@ -94,19 +94,19 @@ public class Combat : MonoBehaviour
 
             enemyScript.shield = 0;
 
-            if (turn % 3 == 1)
+            if (managerScript.enemyIntent == "attack")
             {
 
                 playerScript.TakeDamage(enemyScript.DealDamage(2) * 2);//takes damage from enemy 
 
             }
-            else if (turn % 3 == 2)
+            else if (managerScript.enemyIntent == "block")
             {
 
                 enemyScript.GainBlock();//takes damage from enemy 
 
             }
-            else
+            else if(managerScript.enemyIntent == "attackAndBlock")
             {
 
                 playerScript.TakeDamage(enemyScript.DealDamageAndGainBlock());//takes damage from enemy 

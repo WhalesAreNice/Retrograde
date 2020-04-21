@@ -21,6 +21,9 @@ public class Enemy : MonoBehaviour
         health = 10;
         damage = 6;
         defense = 5;
+        //health = 8 + Random.Range(0, 6);
+        //damage = 5 + Random.Range(0, 4);
+        //defense = 4 + Random.Range(0, 6);
         shield = 0;
         isStunned = false;
     }
