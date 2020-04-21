@@ -126,6 +126,8 @@ public class Combat : MonoBehaviour
         if (enemyScript.health <= 0)
         {
             kill.Play();
+            playerScript.rewardMod++;
+            Debug.Log(playerScript.rewardMod);
         }
     }
 

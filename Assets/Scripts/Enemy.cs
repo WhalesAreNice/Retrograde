@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         health = 10;
-        damage = 6;
+        damage = 3;
         defense = 5;
         shield = 0;
         isStunned = false;

@@ -10,10 +10,12 @@ public class Player : MonoBehaviour
     public List<int> diceValues;
     public int potentialShield;
     public bool preparation;
+    public int maxDamage;
+    public int rewardMod;
     // Start is called before the first frame update
     void Start()
     {
-        health = 10;
+        health = 20;
         shield = 0;
         dicePerTurn = 3;
         preparation = false;
