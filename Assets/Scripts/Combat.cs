@@ -124,12 +124,14 @@ public class Combat : MonoBehaviour
         if (enemyScript.health <= 0)
         {
             kill.Play();
+            playerScript.rewardMod++;
+            Debug.Log(playerScript.rewardMod);
         }
     }
 
     int RollDiceIndex()
     {
-        return Random.Range(0, 6); //returns the index between 0 to amount of dice sides
+        return Random.Range(0, playerScript.maxDamage); //returns the index between 0 to amount of dice sides
     }
 
     void MakeShield()

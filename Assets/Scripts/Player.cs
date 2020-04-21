@@ -9,12 +9,15 @@ public class Player : MonoBehaviour
     public int dicePerTurn;
     public List<int> diceValues;
     public int potentialShield;
+    public int maxDamage;
+    public int rewardMod;
     // Start is called before the first frame update
     void Start()
     {
-        health = 10;
+        health = 25;
         shield = 0;
         dicePerTurn = 3;
+        maxDamage = 6;
         for (int i = 1; i <= 3; i++)
         {
             diceValues.Add(i);
@@ -56,6 +59,14 @@ public class Player : MonoBehaviour
         {
             health -= damageAmount;
         }
+        // if (health <= 0)
+        // {
+        //     //number of enemies killed = reward
+        //     if (rewardMod >= 2)
+        //     {
+        //         Reward();
+        //     }
+        // }
     }
 
 }

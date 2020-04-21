@@ -12,9 +12,9 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        health = 25;
-        damage = 12;
-        defense = 10;
+        health = 10;
+        damage = 5;
+        defense = 2;
         shield = 0;
         isStunned = false;
     }
