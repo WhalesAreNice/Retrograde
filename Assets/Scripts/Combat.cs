@@ -24,6 +24,7 @@ public class Combat : MonoBehaviour
     Enemy enemyScript;
     private int turn;
     private int startingEnemyDamage;
+    private bool hasSelected;
 
     //audio variables
     public AudioSource attack;
@@ -52,8 +53,9 @@ public class Combat : MonoBehaviour
         //diceSides = playerScript.diceSides;
         diceValues = playerScript.diceValues;
         preparationBonus = 2;
+        hasSelected = false;
 
-        enemyScript = enemy.GetComponent<Enemy>();
+    enemyScript = enemy.GetComponent<Enemy>();
         managerScript = manager.GetComponent<Manager>();
         diceRolled = 0;
         turn = 1;
@@ -70,22 +72,28 @@ public class Combat : MonoBehaviour
     {
         //diceIndex.text = RollDiceIndex().ToString();
 
-        if (enemyScript.health + enemyScript.shield > enemyScript.health * 4 / 5)
+        if (enemyScript.health + enemyScript.shield > 8 && !hasSelected)
         {
 
             managerScript.enemyIntent = "attack";
 
+            hasSelected = true;
+
         }
-        else if (enemyScript.health + enemyScript.shield < enemyScript.health * 3 / 5)
+        else if (enemyScript.health + enemyScript.shield < 6 && !hasSelected)
         {
 
             managerScript.enemyIntent = "block";
 
+            hasSelected = true;
+
         }
-        else if (enemyScript.health + enemyScript.shield > enemyScript.health * 3 / 5)
+        else if (enemyScript.health + enemyScript.shield > 6 && !hasSelected)
         {
 
             managerScript.enemyIntent = "attackAndBlock";
+
+            hasSelected = true;
 
         }
 
@@ -119,6 +127,7 @@ public class Combat : MonoBehaviour
             startingEnemyDamage = enemyScript.damage;
             playerScript.shield = playerScript.potentialShield;
             playerScript.potentialShield = 0;
+            hasSelected = false;
 
         }
 

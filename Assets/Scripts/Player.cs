@@ -11,18 +11,18 @@ public class Player : MonoBehaviour
     public List<int> diceValues;
     public int potentialShield;
     public bool preparation;
-<<<<<<< HEAD
+
     public int maxDamage;
     public int rewardMod;
-=======
+
 
     public Image[] hearts;
 
->>>>>>> swaggyP
+
     // Start is called before the first frame update
     void Start()
     {
-        health = 20;
+        health = 10;
         shield = 0;
         dicePerTurn = 3;
         preparation = false;
