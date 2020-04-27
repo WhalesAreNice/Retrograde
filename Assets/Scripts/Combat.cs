@@ -14,6 +14,9 @@ public class Combat : MonoBehaviour
     int diceSides;
     int preparationBonus;
     List<int> diceValues;   //list of dice face values
+    List<string> availableDices; //list of current dices you can pull from
+    List<int> activeDiceIndexes; //list of active dices for the turn
+    int dicesPulledPerTurn = 5;
 
     //enemy's variables
     public GameObject manager;
@@ -52,6 +55,17 @@ public class Combat : MonoBehaviour
         //diceType = playerScript.diceType;
         //diceSides = playerScript.diceSides;
         diceValues = playerScript.diceValues;
+
+        availableDices = new List<string>();
+        //adding 3 attack and 3 shield dies to the list of available dices
+        for(int i = 0; i < 3; i++)
+        {
+            availableDices.Add("attack");
+            availableDices.Add("shield");
+        }
+
+        activeDiceIndexes = new List<int>();
+
         preparationBonus = 2;
         hasSelected = false;
 
@@ -65,6 +79,8 @@ public class Combat : MonoBehaviour
         attack_Btn.onClick.AddListener(DealDamage);
         defense_Btn.onClick.AddListener(MakeShield);
         reckless_Btn.onClick.AddListener(RecklessSwing);
+
+        NewUsableDices();
     }
 
     // Update is called once per frame
@@ -140,6 +156,38 @@ public class Combat : MonoBehaviour
             playerScript.rewardMod++;
             Debug.Log(playerScript.rewardMod);
         }
+    }
+
+    void NewUsableDices()
+    {
+        activeDiceIndexes.Clear();
+
+        //loop forever until there are enough active dices
+        while(activeDiceIndexes.Count < dicesPulledPerTurn)
+        {
+            bool alreadyActive = false; //check for if the dice is active or not 
+            int index = Random.Range(0, availableDices.Count); //gets a random number (index)
+            //loop through the index list to see if there is the same number
+            for(int i = 0; i < activeDiceIndexes.Count; i++)
+            {
+                //checks to make sure there's no duplicates of the same index
+                if(activeDiceIndexes[i] == index)
+                {
+                    alreadyActive = true;
+                }
+            }
+
+            //if alreadyActive is still false, add the index to the list
+            if (!alreadyActive)
+            {
+                activeDiceIndexes.Add(index);
+                Debug.Log("adding dice #" + index + " to list");
+            }
+        }
+        //for (int i = 0; i < activeDiceIndexes.Count; i++)
+        //{
+        //    Debug.Log(activeDiceIndexes[i]);
+        //}
     }
 
     int RollDiceIndex()
