@@ -14,7 +14,7 @@ public class Combat : MonoBehaviour
     int diceSides;
     int preparationBonus;
     List<int> diceValues;   //list of dice face values
-    List<string> availableDices; //list of current dices you can pull from
+    public List<string> availableDices; //list of current dices you can pull from
     List<int> activeDiceIndexes; //list of active dices for the turn
     int dicesPulledPerTurn = 5;
 
