@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
 
 
     public Image[] hearts;
+    public Image[] shields;
 
 
     // Start is called before the first frame update
@@ -47,6 +48,18 @@ public class Player : MonoBehaviour
             else
             {
                 hearts[i].enabled = false;
+            }
+        }
+
+        for (int i = 0; i < shields.Length; i++)
+        {
+            if (i < shield)
+            {
+                shields[i].enabled = true;
+            }
+            else
+            {
+                shields[i].enabled = false;
             }
         }
     }
