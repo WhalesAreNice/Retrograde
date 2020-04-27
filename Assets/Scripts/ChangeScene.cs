@@ -7,12 +7,14 @@ public class ChangeScene : MonoBehaviour
 
     private Player playerScript;
     private Enemy enemyScript;
+    private Combat combatScript;
 
     // Start is called before the first frame update
     void Start()
     {
         playerScript = GameObject.Find("Player").GetComponent<Player>();
         enemyScript = GameObject.Find("Enemy").GetComponent<Enemy>();
+        combatScript = GameObject.Find("Manager").GetComponent<Combat>();
     }
 
     void Update()
@@ -32,23 +34,31 @@ public class ChangeScene : MonoBehaviour
     public void Reward()
     {
         //ideas:
-            //permanent buff to attack/def dice
-            //access to different dice at start
-            //increase to num of dice per turn
+        //permanent buff to attack/def dice
+        //access to different dice at start
+        //increase to num of dice per turn
+
+        string[] possibleRewards = {"RecklessSwing", "VampiricStrike", "Preparation", "SteadyShield", "Wildcard", "Hinder", "ShieldBash", "Reposition"};
+        int reward1 = Random.Range(0, possibleRewards.Length);
+        int reward2 = Random.Range(0, possibleRewards.Length);
+
+        while (reward1 == reward2)
+        {
+
+            reward2 = Random.Range(0, 5);
+
+        }
+
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            playerScript.health = playerScript.health + 5;
-            Debug.Log("Health increased");
+
+            combatScript.availableDices.Add(possibleRewards[reward1]);
+
         }
         else if (Input.GetKeyDown(KeyCode.X))
         {
-            playerScript.dicePerTurn++;
-            Debug.Log("Dice per turn increased");
-        }
-        else if (Input.GetKeyDown(KeyCode.C))
-        {
-            playerScript.maxDamage = playerScript.maxDamage + 2;
-            Debug.Log("Damage potential increased");
+            combatScript.availableDices.Add(possibleRewards[reward2]);
+
         }
     }
 

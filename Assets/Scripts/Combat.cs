@@ -139,6 +139,7 @@ public class Combat : MonoBehaviour
 
 
             turn++;
+            NewUsableDices();
             diceRolled = 0;
             startingEnemyDamage = enemyScript.damage;
             playerScript.shield = playerScript.potentialShield;
@@ -147,8 +148,8 @@ public class Combat : MonoBehaviour
 
         }
 
-        Debug.Log("Enemy Health : " + enemyScript.health +
-            "\nPlayer Health: " + playerScript.health + " Player Shield: " + playerScript.shield);
+        //Debug.Log("Enemy Health : " + enemyScript.health +
+        //    "\nPlayer Health: " + playerScript.health + " Player Shield: " + playerScript.shield);
 
         if (enemyScript.health <= 0)
         {
@@ -181,13 +182,13 @@ public class Combat : MonoBehaviour
             if (!alreadyActive)
             {
                 activeDiceIndexes.Add(index);
-                Debug.Log("adding dice #" + index + " to list");
+                //Debug.Log("adding dice #" + index + " to list");
             }
         }
-        //for (int i = 0; i < activeDiceIndexes.Count; i++)
-        //{
-        //    Debug.Log(activeDiceIndexes[i]);
-        //}
+        for (int i = 0; i < activeDiceIndexes.Count; i++)
+        {
+            //Debug.Log(availableDices[activeDiceIndexes[i]]);
+        }
     }
 
     int RollDiceIndex()
