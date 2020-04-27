@@ -21,6 +21,9 @@ public class Manager : MonoBehaviour
     private Enemy enemyScript;
     private Combat combatScript;
 
+    public Button question_Btn;
+
+    public Text rollsLeft;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,13 +31,13 @@ public class Manager : MonoBehaviour
         playerScript = player.GetComponent<Player>();
         enemyScript = enemy.GetComponent<Enemy>();
         combatScript = manager.GetComponent<Combat>();
-
+        //question_Btn.onClick.AddListener(showEnemyIntention);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+    
         // Resets the game
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -42,11 +45,24 @@ public class Manager : MonoBehaviour
             //enemyScript.Reset();//takes damage from enemy 
         }
 
+        showEnemyIntention();
         // Updates the displayed amount of health for the player and enemy
-        playerHealthText.text = "Player Health: " + playerScript.health;
-        enemyHealthText.text = "Enemy Health: " + enemyScript.health + "\nEnemy Shield: " + enemyScript.shield;
+        // playerHealthText.text = "Player Health: " + playerScript.health;
+
+        //enemyHealthText.text = "Enemy Health: " + enemyScript.health + "\nEnemy Shield: " + enemyScript.shield;
 
         // Informs the player of what the enemy will do on it's turn based on what its intent is.
+
+
+        // Tells the player how to play the game
+        //Instructions.text = "Press W to roll and attack die and E to roll a defense die. Press R to roll a die that deals 5-10 damage but has a chance of delaing 5 damage to yourself as well."
+        //+ "Both dice will roll a value between 1 and 3.\nYou can roll " + (playerScript.dicePerTurn - combatScript.diceRolled) + " more dice before the enemy takes their action.\nPress R to reset the game.";
+
+        rollsLeft.text = "Rolls Left: " + (playerScript.dicePerTurn - combatScript.diceRolled);
+    }
+
+    void showEnemyIntention()
+    {
         if (enemyIntent == "attack")
         {
 
@@ -65,11 +81,6 @@ public class Manager : MonoBehaviour
             enemyActionText.text = "The enemy intends to deal " + enemyScript.damage / 2 + " damage to you and gain " + (enemyScript.defense * 2 / 3) + " shield";
 
         }
-
-        // Tells the player how to play the game
-        Instructions.text = "Press W to roll and attack die and E to roll a defense die. Press R to roll a die that deals 5-10 damage but has a chance of delaing 5 damage to yourself as well."
-            + "Both dice will roll a value between 1 and 3.\nYou can roll " + (playerScript.dicePerTurn - combatScript.diceRolled) + " more dice before the enemy takes their action.\nPress R to reset the game.";
-
     }
 
 }

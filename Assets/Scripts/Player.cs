@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -10,8 +11,14 @@ public class Player : MonoBehaviour
     public List<int> diceValues;
     public int potentialShield;
     public bool preparation;
+<<<<<<< HEAD
     public int maxDamage;
     public int rewardMod;
+=======
+
+    public Image[] hearts;
+
+>>>>>>> swaggyP
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +37,18 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //displaying player health
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            if (i < health)
+            {
+                hearts[i].enabled = true;
+            }
+            else
+            {
+                hearts[i].enabled = false;
+            }
+        }
     }
 
     public void Reset()
