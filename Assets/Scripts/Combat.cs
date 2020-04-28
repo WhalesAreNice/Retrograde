@@ -195,9 +195,35 @@ public class Combat : MonoBehaviour
                 activeDiceIndexes.Add(index);
                 //Debug.Log("adding dice #" + index + " to list");
             }
+
+
         }
         for (int i = 0; i < activeDiceIndexes.Count; i++)
         {
+
+            attack_Btns[i].gameObject.SetActive(false);
+            defense_Btns[i].gameObject.SetActive(false);
+            reckless_Btns[i].gameObject.SetActive(false);
+
+
+            if (availableDices[activeDiceIndexes[i]] == "attack")
+            {
+
+                attack_Btns[i].gameObject.SetActive(true);
+
+            }
+            else if (availableDices[activeDiceIndexes[i]] == "shield")
+            {
+
+                defense_Btns[i].gameObject.SetActive(true);
+
+            }
+            else if (availableDices[activeDiceIndexes[i]] == "Reckless Swing")
+            {
+
+                reckless_Btns[i].gameObject.SetActive(true);
+
+            }
             Debug.Log(availableDices[activeDiceIndexes[i]]);
         }
     }
