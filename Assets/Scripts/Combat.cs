@@ -36,9 +36,9 @@ public class Combat : MonoBehaviour
     public AudioSource damage;
 
     //buttons
-    public Button attack_Btn;
-    public Button defense_Btn;
-    public Button reckless_Btn;
+    public Button[] attack_Btns;
+    public Button[] defense_Btns;
+    public Button[] reckless_Btns;
     //text
     public Text diceIndex;
 
@@ -76,9 +76,14 @@ public class Combat : MonoBehaviour
         startingEnemyDamage = enemyScript.damage;
 
         //buttons for different dices
-        attack_Btn.onClick.AddListener(DealDamage);
-        defense_Btn.onClick.AddListener(MakeShield);
-        reckless_Btn.onClick.AddListener(RecklessSwing);
+        for (int i = 0; i < 5; i++)
+        {
+         
+            attack_Btns[i].onClick.AddListener(DealDamage);
+            defense_Btns[i].onClick.AddListener(MakeShield);
+            reckless_Btns[i].onClick.AddListener(RecklessSwing);
+
+        }
 
         NewUsableDices();
     }
