@@ -156,6 +156,12 @@ public class Combat : MonoBehaviour
             kill.Play();
             playerScript.rewardMod++;
             Debug.Log(playerScript.rewardMod);
+
+            turn = 0;
+            NewUsableDices();
+            diceRolled = 0;
+            playerScript.potentialShield = 0;
+            hasSelected = false;
         }
     }
 
@@ -187,7 +193,7 @@ public class Combat : MonoBehaviour
         }
         for (int i = 0; i < activeDiceIndexes.Count; i++)
         {
-            //Debug.Log(availableDices[activeDiceIndexes[i]]);
+            Debug.Log(availableDices[activeDiceIndexes[i]]);
         }
     }
 

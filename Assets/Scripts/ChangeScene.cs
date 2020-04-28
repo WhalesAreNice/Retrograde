@@ -10,6 +10,10 @@ public class ChangeScene : MonoBehaviour
     private Player playerScript;
     private Enemy enemyScript;
     private Combat combatScript;
+    private bool notChosen;
+    private string[] possibleRewards = { "Reckless Swing", "Vampiric Strike", "Preparation", "Steady Shield", "Wildcard", "Hinder", "Shield Bash", "Reposition" };
+    int reward1;
+    int reward2;
 
     // Start is called before the first frame update
     void Start()
@@ -29,8 +33,23 @@ public class ChangeScene : MonoBehaviour
         }
         else if (enemyScript.health <= 0){
             //number of enemies killed = reward
-            RewardCheck();
+            Reward();
             enemyScript.Reset();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Z) && notChosen)
+        {
+
+            combatScript.availableDices.Add(possibleRewards[reward1]);
+            rewardOptions.text = "";
+            notChosen = false;
+        }
+        else if (Input.GetKeyDown(KeyCode.X) && notChosen)
+        {
+            combatScript.availableDices.Add(possibleRewards[reward2]);
+            rewardOptions.text = "";
+            notChosen = false;
+
         }
     }
 
@@ -41,56 +60,30 @@ public class ChangeScene : MonoBehaviour
         //access to different dice at start
         //increase to num of dice per turn
 
-        string[] possibleRewards = {"RecklessSwing", "VampiricStrike", "Preparation", "SteadyShield", "Wildcard", "Hinder", "ShieldBash", "Reposition"};
-        int reward1 = Random.Range(0, possibleRewards.Length);
-        int reward2 = Random.Range(0, possibleRewards.Length);
+        reward1 = Random.Range(0, possibleRewards.Length);
+        reward2 = Random.Range(0, possibleRewards.Length);
 
         while (reward1 == reward2)
         {
 
-            reward2 = Random.Range(0, 5);
+            reward2 = Random.Range(0, possibleRewards.Length);
 
-        rewardOptions.text = "Enemy killed, pick your reward! \n (Z) Health Increase \n (X) Increase Dice Per Turn \n (C) Increase Damage Potential";
-
-        if (Input.GetKey(KeyCode.Z))
-        {
-            playerScript.health = playerScript.health + 5;
-            Debug.Log("Health increased");
-            rewardOptions.text = "Health increased";
-            //rewardOptions.text = "";
         }
+        rewardOptions.text = "Enemy killed, pick your reward! \n (Z) " + possibleRewards[reward1] + " \n (X) " + possibleRewards[reward2];
 
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-
-            combatScript.availableDices.Add(possibleRewards[reward1]);
-
-            playerScript.dicePerTurn++;
-            Debug.Log("Dice per turn increased");
-            rewardOptions.text = "Dice per turn increased";
-            //rewardOptions.text = "";
-        }
-        else if (Input.GetKeyDown(KeyCode.X))
-        {
-            combatScript.availableDices.Add(possibleRewards[reward2]);
-
-            playerScript.maxDamage = playerScript.maxDamage + 2;
-            Debug.Log("Damage potential increased");
-            rewardOptions.text = "Damage potential increased";
-            //rewardOptions.text = "";
-        }
+        notChosen = true;
     }
 
     public void RewardCheck(){
         if (playerScript.rewardMod % 2 == 0){
             playerScript.dicePerTurn++;
             Debug.Log("Dice per turn Increased to: " + playerScript.dicePerTurn);
-            rewardOptions.text = "Enemy killed!\nDice per turn Increased to: " + playerScript.dicePerTurn;
+            //rewardOptions.text = "Enemy killed!\nDice per turn Increased to: " + playerScript.dicePerTurn;
         }
         else{
             playerScript.health = playerScript.health + 5;
             Debug.Log("Health Increased to: " + playerScript.health);
-            rewardOptions.text = "Enemy killed!\nHealth Increased to: " + playerScript.health;
+            //rewardOptions.text = "Enemy killed!\nHealth Increased to: " + playerScript.health;
         }
     }
 }
