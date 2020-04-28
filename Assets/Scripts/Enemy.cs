@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,9 +15,6 @@ public class Enemy : MonoBehaviour
     public Image[] hearts;
     public Image[] shields;
 
-    
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -30,8 +26,6 @@ public class Enemy : MonoBehaviour
         //defense = 4 + Random.Range(0, 6);
         shield = 0;
         isStunned = false;
-        
-
     }
 
     // Update is called once per frame
@@ -61,7 +55,6 @@ public class Enemy : MonoBehaviour
                 shields[i].enabled = false;
             }
         }
-        
     }
 
     public void Reset()
