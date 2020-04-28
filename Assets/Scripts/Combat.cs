@@ -14,7 +14,7 @@ public class Combat : MonoBehaviour
     int diceSides;
     int preparationBonus;
     List<int> diceValues;   //list of dice face values
-    List<string> availableDices; //list of current dices you can pull from
+    public List<string> availableDices; //list of current dices you can pull from
     List<int> activeDiceIndexes; //list of active dices for the turn
     int dicesPulledPerTurn = 5;
 
@@ -145,6 +145,7 @@ public class Combat : MonoBehaviour
 
 
             turn++;
+            NewUsableDices();
             diceRolled = 0;
             startingEnemyDamage = enemyScript.damage;
             playerScript.shield = playerScript.potentialShield;
@@ -153,17 +154,26 @@ public class Combat : MonoBehaviour
 
         }
 
-        Debug.Log("Enemy Health : " + enemyScript.health +
-            "\nPlayer Health: " + playerScript.health + " Player Shield: " + playerScript.shield);
+        //Debug.Log("Enemy Health : " + enemyScript.health +
+        //    "\nPlayer Health: " + playerScript.health + " Player Shield: " + playerScript.shield);
 
         if (enemyScript.health <= 0)
         {
             kill.Play();
             playerScript.rewardMod++;
             Debug.Log(playerScript.rewardMod);
+<<<<<<< HEAD
             ghost.enabled = true;
             owl.enabled = false;
             Invoke("showImage", 1);
+=======
+
+            turn = 0;
+            NewUsableDices();
+            diceRolled = 0;
+            playerScript.potentialShield = 0;
+            hasSelected = false;
+>>>>>>> 5d1eb0e103de494d311c3f0d6d065188832ecb32
         }
     }
 
@@ -190,13 +200,13 @@ public class Combat : MonoBehaviour
             if (!alreadyActive)
             {
                 activeDiceIndexes.Add(index);
-                Debug.Log("adding dice #" + index + " to list");
+                //Debug.Log("adding dice #" + index + " to list");
             }
         }
-        //for (int i = 0; i < activeDiceIndexes.Count; i++)
-        //{
-        //    Debug.Log(activeDiceIndexes[i]);
-        //}
+        for (int i = 0; i < activeDiceIndexes.Count; i++)
+        {
+            Debug.Log(availableDices[activeDiceIndexes[i]]);
+        }
     }
 
     int RollDiceIndex()
