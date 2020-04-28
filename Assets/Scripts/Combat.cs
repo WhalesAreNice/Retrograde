@@ -47,7 +47,9 @@ public class Combat : MonoBehaviour
     public int attackroll;
     public int recklessroll;
 
+    //images
     public Image[] dices;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +57,7 @@ public class Combat : MonoBehaviour
         //diceType = playerScript.diceType;
         //diceSides = playerScript.diceSides;
         diceValues = playerScript.diceValues;
+        
 
         availableDices = new List<string>();
         //adding 3 attack and 3 shield dies to the list of available dices
@@ -132,7 +135,7 @@ public class Combat : MonoBehaviour
             }
             else if(managerScript.enemyIntent == "attackAndBlock")
             {
-
+                
                 playerScript.TakeDamage(enemyScript.DealDamageAndGainBlock());//takes damage from enemy 
 
             }
