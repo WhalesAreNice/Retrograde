@@ -156,24 +156,12 @@ public class Combat : MonoBehaviour
             kill.Play();
             playerScript.rewardMod++;
             Debug.Log(playerScript.rewardMod);
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-            ghost.enabled = true;
-            owl.enabled = false;
-            Invoke("showImage", 1);
-=======
->>>>>>> swaggyP
 
             turn = 0;
             NewUsableDices();
             diceRolled = 0;
             playerScript.potentialShield = 0;
             hasSelected = false;
-<<<<<<< HEAD
-=======
->>>>>>> 5d1eb0e103de494d311c3f0d6d065188832ecb32
->>>>>>> swaggyP
         }
     }
 
