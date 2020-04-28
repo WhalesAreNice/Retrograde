@@ -49,8 +49,6 @@ public class Combat : MonoBehaviour
 
     //images
     public Image[] dices;
-    public Image ghost;
-    public Image owl;
 
     // Start is called before the first frame update
     void Start()
@@ -59,8 +57,7 @@ public class Combat : MonoBehaviour
         //diceType = playerScript.diceType;
         //diceSides = playerScript.diceSides;
         diceValues = playerScript.diceValues;
-
-        ghost.enabled = false;
+        
 
         availableDices = new List<string>();
         //adding 3 attack and 3 shield dies to the list of available dices
@@ -168,9 +165,6 @@ public class Combat : MonoBehaviour
             diceRolled = 0;
             playerScript.potentialShield = 0;
             hasSelected = false;
-            ghost.enabled = true;
-            owl.enabled = false;
-            Invoke("showImage", 1);
         }
     }
 
@@ -402,11 +396,5 @@ public class Combat : MonoBehaviour
                 dices[i].enabled = false;
             }
         }
-    }
-
-    public void showImage()
-    {
-        ghost.enabled = false;
-        owl.enabled = true;
     }
 }
